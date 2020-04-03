@@ -1,0 +1,120 @@
+@media (min-width: 650px) {
+  #main-section-1 #intro:hover, #main-section-2 #intro:hover, #main-section-3 #intro:hover, #main-section-2:hover {
+    border: 2px solid black;
+    border-radius: 5px 5px;
+    padding: 5px;
+    font-weight: 700;
+    width: 115%;
+    height: 115%; } }
+@media (max-width: 649px) {
+  #main-section-1 #intro:hover, #main-section-2 #intro:hover, #main-section-3 #intro:hover, #main-section-2:hover {
+    border: 2px solid black;
+    border-radius: 5px 5px;
+    padding: 5px;
+    font-weight: 700; }
+
+  #menu ul li {
+    display: flex; } }
+.center, #main-section-1 #intro, #main-section-2 #intro, #main-section-3 #intro {
+  text-align: center; }
+
+.navbar-brand img {
+  max-width: 45px;
+  max-height: 45px;
+  min-width: 30px;
+  min-height: 30px; }
+
+#home-header .navbar-brand img {
+  content: url("https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ3JRrNqIb46k_5VIEAKF8sU3IH8jSHZVgMpSd2OXXBcu7efjOY&usqp=CAU"); }
+
+#course-header .navbar-brand img {
+  content: url("https://pbs.twimg.com/media/Dh1kxn1W0AA335d.jpg"); }
+
+#project-header .navbar-brand img {
+  content: url("https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSkiDiEarjyW8RFIG_AJVxasboLbTAUEjiPmD7PaIn81YzIlcdz&usqp=CAU"); }
+
+.navbar-nav a.nav-link {
+  font-size: 18px;
+  font-weight: 500; }
+
+.nav-item.active {
+  background: black; }
+
+.navbar a {
+  padding-left: 10px;
+  padding-right: 10px; }
+
+.navbar-brand a:hover {
+  font-size: 24px;
+  border-bottom: 1px solid white; }
+
+.main-container {
+  margin: 10px 5px;
+  padding: 10px; }
+
+body {
+  background: #efefef;
+  font: 17px system-ui,BlinkMacSystemFont,"Segeo UI","Helvetica","sans-serif", "arial"; }
+
+ul {
+  list-style: none; }
+
+h3 {
+  font-weight: 30px;
+  font-size: 27px; }
+
+p {
+  font-size: 18px;
+  font-weight: 400; }
+
+a {
+  color: black; }
+
+a:hover {
+  color: blue;
+  text-decoration: none; }
+
+#lang-change::before {
+  content: "Ni hao, Wo jiao"; }
+
+#lang-change:hover::before {
+  content: "Hello, My name is"; }
+
+#main-section-1, #main-section-2, #main-section-3 {
+  margin: 30px 0; }
+  #main-section-1 #intro, #main-section-2 #intro, #main-section-3 #intro {
+    display: block;
+    background-image: linear-gradient(yellow, red);
+    border: 1px solid black;
+    margin-right: 20%; }
+  #main-section-1 #intro:hover, #main-section-2 #intro:hover, #main-section-3 #intro:hover {
+    margin-right: 0; }
+  #main-section-1 #section-2-img, #main-section-2 #section-2-img, #main-section-3 #section-2-img {
+    max-width: 100%;
+    max-height: 100%; }
+
+#main-section-2 {
+  background-image: linear-gradient(red, yellow);
+  border: 1px solid black;
+  padding: 10px;
+  margin-left: 10%; }
+  #main-section-2 .inner-2 {
+    border-left: 1px solid black;
+    padding-left: 20px; }
+
+#main-section-2:hover {
+  margin-left: 0%; }
+
+#main-section-3 {
+  margin: 30 40px; }
+  #main-section-3 tbody a {
+    color: white; }
+  #main-section-3 tbody a:hover {
+    color: blue; }
+
+#ab-link::before {
+  color: black;
+  font: 20px bold;
+  content: "Click here \21d2  "; }
+
+/*# sourceMappingURL=main.css.map */

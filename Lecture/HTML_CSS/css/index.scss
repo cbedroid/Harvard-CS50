@@ -1,0 +1,137 @@
+$grey-white:#edebeb;
+
+body{
+  width:auto;
+  height:auto;
+	min-width: 100%;
+	min-height: 100%;
+  background-image:url("https://cdn.datafloq.com/cache/blog_pictures/878x531/artificial-intelligence-future-of-programming.jpg"),url("https://www.goodcore.co.uk/blog/wp-content/uploads/2019/08/coding-vs-programming-2-1024x439.jpg");
+  background-repeat: no-repeat no-repeat;
+  background-position:center center fixed; 
+  background-attachment: fixed ;
+ 	-webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  color:$grey-white;
+}
+
+@media (min-width: 650px) {
+  /* large screen */
+	.intro-sub{
+  	font-size: 28px;
+		}
+
+  .intro-primary {
+    position:absolute;
+    top:20%;
+    left:20%;
+    display:block;
+    font-size:44px;
+    font-weight:800;
+    letter-spacing: 10px;
+    margin-bottom:10%;
+    }
+
+  .intro-primary::before{
+      content:"WELCOME TO";
+    }
+
+  .intro-sub {
+    display:block;
+    position:absolute;
+    top:30%;
+    left:28%;
+    font-size:40px;
+    font-weight:800;
+    text-transform:uppercase;
+  }
+
+.container{
+  position:absolute;
+  top:50%;
+  left:15%;
+  }
+
+  .no-gutters{
+    padding-right:10%; 
+  }
+
+} 
+
+@media (max-width: 649px) {
+  /*smaller screens*/
+  .intro-primary {
+    position:absolute;
+    top:15%;
+    left:10%;
+    display:block;
+    font-size:32px;
+    font-weight:800;
+    letter-spacing: 10px;
+    margin-bottom:10%;
+  }
+
+
+  .intro-sub {
+    display:block;
+    position:absolute;
+    top:15%;
+    left:5%;
+    font-size: 36px;
+    font-weight:800;
+    color:purple;
+    letter-spacing:.2em;
+  }
+
+  .container{
+    position:absolute;
+    top:35%;
+    left:10%;
+    color:blue;
+  }
+
+ }
+
+.intro-primary {
+ letter-spacing:.5em; 
+}
+
+.intro-sub {
+  text-transform:uppercase;
+}
+
+.text-box span {
+  text-shadow:2px 2px  red;
+}
+
+
+button{
+    margin:0;
+    background:transparent;
+    padding: 5px;
+    border:none;
+    a{
+      font-weight:600;
+      text-decoration:none;
+      color:$grey-white;
+    }
+
+    a:hover{
+      border-bottom:2px solid red;
+      text-decoration:none;
+      font-size:32px;
+    }
+  } 
+
+  button:hover {
+    opacity:.8;
+  }
+
+footer {
+  position:absolute;
+  bottom:1%;
+  left:1%;
+	color:grey;
+ 
+}

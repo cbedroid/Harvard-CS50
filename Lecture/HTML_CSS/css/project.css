@@ -1,0 +1,88 @@
+@import url(main.css);
+body {
+  font-size: 1em;
+  line-height: 1.5;
+  font-weight: 400; }
+
+header h1 {
+  text-shadow: 2px 2px green; }
+
+.container {
+  padding-left: 5%;
+  padding-right: 5%;
+  display: table;
+  margin: 20px; }
+
+#title H1 {
+  text-align: center;
+  border-bottom: 2px solid black;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: .3em; }
+
+#intro {
+  text-align: center;
+  margin: 5% 0; }
+
+#intro img {
+  height: auto;
+  width: auto;
+  min-height: 60%;
+  min-width: 60%; }
+
+.underline {
+  text-decoration: underline; }
+
+.row {
+  margin: 5% 0; }
+  .row > div {
+    display: block;
+    background: #f5f5f5; }
+
+p {
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: 420; }
+  p a {
+    font-weight: 450;
+    color: blue; }
+
+#genre p {
+  font-weight: bold;
+  margin: 5px 0; }
+#genre ul {
+  font-weight: 500;
+  margin-bottom: 0; }
+
+.invite a {
+  color: blue; }
+
+.boldtext {
+  font-weight: bold; }
+
+#download-box {
+  display: block;
+  border: 2px solid black;
+  list-style: none;
+  background: #e3e3e3; }
+  #download-box #label {
+    text-align: center;
+    border: 1px solid black;
+    border-collapse: collapse; }
+  #download-box span {
+    display: inline-block;
+    width: auto;
+    min-width: 100%;
+    white-space: nowrap; }
+  #download-box li {
+    display: inline-block;
+    margin-top: 2%;
+    padding: 2%; }
+    #download-box li #youtube {
+      width: 70px;
+      height: 30px; }
+
+/*# sourceMappingURL=project.css.map */

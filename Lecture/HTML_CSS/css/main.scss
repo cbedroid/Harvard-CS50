@@ -1,0 +1,197 @@
+
+// maximize content on larger screen
+@media (min-width: 650px) {
+
+  %pop-up {
+    border: 2px solid black;
+    border-radius: 5px 5px;
+    padding: 5px;
+    font-weight: 700;
+    width:115%;
+    height:115%;
+  }
+}
+
+// minimize content on smaller screen 
+@media (max-width: 649px) {
+
+%pop-up {
+    border: 2px solid black;
+    border-radius: 5px 5px;
+    padding: 5px;
+    font-weight: 700;
+  }
+
+  #menu ul {
+    li {
+      display:flex;
+    }
+  }
+}
+
+%rounded-corner {
+  border: 2px solid black;
+  border-radius: 5px 5px;
+}
+
+%centered {
+  text-align:center;
+}
+
+
+
+.navbar-brand img {
+    
+    max-width:45px;
+    max-height:45px;
+    min-width:30px;
+    min-height:30px;
+  }
+
+  #home-header .navbar-brand img {
+    content: url("https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ3JRrNqIb46k_5VIEAKF8sU3IH8jSHZVgMpSd2OXXBcu7efjOY&usqp=CAU");
+    }
+
+
+  #course-header .navbar-brand img {
+    content:url("https://pbs.twimg.com/media/Dh1kxn1W0AA335d.jpg");
+  }
+
+  #project-header .navbar-brand img {
+    content: url("https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSkiDiEarjyW8RFIG_AJVxasboLbTAUEjiPmD7PaIn81YzIlcdz&usqp=CAU");
+
+  }
+
+
+// sass variables colors
+$teal:#03adfc;
+$greyish-white:#d7dbe0;
+$smokey-grey:#3d3f42;
+$charcoal:#636569;
+
+//header selectors
+.navbar-nav a.nav-link  {
+  font-size:18px;
+  font-weight:500;
+}
+
+.nav-item.active  {
+  background:black;
+}
+
+.navbar a {
+  padding-left:10px;
+  padding-right:10px;
+}
+
+.navbar-brand a:hover {
+  font-size:24px;
+  border-bottom:1px solid white;
+}
+
+.center {
+  @extend %centered;
+}
+
+.main-container {
+  margin:10px 5px;  
+  padding:10px
+}
+
+// body selectors
+body {
+  background:#efefef;
+  font: 17px system-ui,BlinkMacSystemFont,"Segeo UI","Helvetica","sans-serif", "arial";
+}
+
+ul{
+	list-style:none;
+}
+
+
+h3 {
+  font-weight:30px;
+  font-size:27px;
+}
+
+p {
+  font-size: 18px;
+  font-weight:400;
+}
+
+a {
+  color:black;
+  }
+
+a:hover {
+      color:blue;
+      text-decoration: none;
+    }
+
+
+#lang-change::before {
+ content:"Ni hao, Wo jiao"; 
+}
+
+#lang-change:hover::before {
+ content:"Hello, My name is"; 
+}
+
+#main-section-1, #main-section-2, #main-section-3 {
+  margin: 30px 0 ;
+
+  #intro {
+    display:block;
+    background-image: linear-gradient(yellow,red);
+    border: 1px solid black;
+    @extend %centered;
+    margin-right:20%;
+  }
+  #intro:hover {
+    @extend %pop-up;
+    margin-right:0;
+  }
+  #section-2-img {
+    max-width:100%;
+    max-height:100%;
+  }
+}
+
+
+#main-section-2 {
+  background-image: linear-gradient(red, yellow);
+  border: 1px solid black;
+  padding:10px;
+  margin-left:10%;
+
+  .inner-2 {
+    border-left:1px solid black;
+    padding-left:20px;
+  }
+}
+
+
+#main-section-2:hover {
+   @extend %pop-up;
+   margin-left:0%;
+}
+
+
+#main-section-3 {
+  margin:30 40px;
+  tbody a {
+  color:white; 
+  }
+
+  tbody a:hover {
+  color:blue; 
+  }
+}
+
+#ab-link::before {
+  color:black;
+  font:20px bold;
+  content:"Click here \21d2  ";
+}
+
+
