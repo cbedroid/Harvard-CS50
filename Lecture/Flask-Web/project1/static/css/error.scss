@@ -1,0 +1,45 @@
+%center {
+  text-align:center;  
+}
+
+body {
+  background:#dbcfc1;
+}
+
+#sect-error {
+   font-size:28px;
+
+  div {
+    margin:20px 0; 
+  }
+
+  h1,h2,h3 {
+   @extend %center;
+   font-weight:bold;
+   margin:10px;
+  }
+
+  h1{
+    margin:0;
+    padding:10px;
+    color:white;
+    background:#7d7b78;
+    border-bottom: 2px solid black;
+   }
+
+  .error-message  {
+    @extend %center;
+    margin:0 20px;
+   
+    .error-links {
+      padding:15px;
+      width:80%;
+
+      button{
+        width:auto;
+        max-width:40%;
+      }
+     } 
+    }
+
+}

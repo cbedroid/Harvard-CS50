@@ -1,3 +1,8 @@
 *.sw*
 *sass-cache*
 *css.map*
+*myuri*
+*pycache*
+*flask_session*
+*.pyc*
+

@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+  {% block content %}
+  <section id="sect-one">
+    <h1 id="pitch-intro">LOOKING FOR A BOOK?</h1>
+    <div class="row">
+      <div class="col-lg-4 welcome-view" id="sub-col-one">
+        <h3 class="pitch-title">We got you covered!</h3>
+        <p>With over over 5000 selection of book, we are guarantee to have any book that you need!
+        </p>
+        <a id="search-button" href="{{ url_for('search') }}"><button>Search</button></a>
+      </div>
+      <div class="col-lg-4">
+        <div id="cover">
+          <img src="{{ url_for('static',filename='images/cover3.jpg') }}" alt="">
+          <p></p>
+        </div>
+      </div>
+
+      <div class="col-lg-4 welcome-view" id="sub-col-two">
+        <h3 class="pitch-title">Let's get started today</h3>
+        <p>Login to get access to all of your favorite books!
+        <ul>
+          <li>
+            <a href="{{ url_for('register') }}">Create Account</a>
+          </li>
+          <li>
+            <a href="{{ url_for('register') }}">Login</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <section id="sect-two">
+    <div id="ratings">
+      <h4> &#11088; Rated #1</h4>
+      <h3>Best Sellers &#x2609; Top Authors &#x2609; Over 5 millions Sold <h3>
+    </div>
+    <div class="container">
+      <div class="row align-items-start">
+        <div class="col">
+          {% for book in books %}
+            {% if not book.error %}
+            <span>
+              <div class="book-display">
+                <p class="dc-title">{{book.title|safe }}</p>
+                <h3 class="dc-book-image">
+                  <img src="{{ book.image_url|safe }}" alt="">
+                </h3>
+                <div class="dc-rating">
+                  <h5>Rating</h5>
+                  {{ book.average_rating|safe }}
+                  out of 5
+                </div>
+              </div>
+            </span>
+           {% endif %}  
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </section>
+  {% endblock content %}
+

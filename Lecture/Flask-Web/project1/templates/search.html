@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+{% block content %}
+<section>
+  <div id="search" class="form-group">
+    <h1>Find a book</h1>
+    <form action="{{ url_for('search') }}" method="post">
+      <ul>
+        <fieldset class="from-group">
+          <!-- Radio Buttons -->
+          <div class="form-group">
+            <li id='search-radio-btn'>
+              {{ radioform.radio.label(class="form-control-label") }}</br>
+            {% if radioform.radio.errors %}
+              {{ radioform.radio(class="form-control form-control-lg is-invalid") }}
+              <div class="invalid-feedback">
+                {% for error in radiofrom.radio.errors %}
+                  <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+            {% else %}
+              {% for subfield in radioform.radio %}
+                <label class="radio" for="">
+                  {{ subfield }}
+                  {{ subfield.label }}
+                </label>
+               {% endfor %}
+            {% endif %}
+            </li>
+          </div>
+
+          <!-- Text Field -->
+          <div class="form-group">
+            <li id=search-bar>
+            {{ textform.search.label(class="form-control-label") }}
+            {% if textform.search.errors %}
+              {{ textform.search(class="form-control form-control-lg is-invalid") }}
+              <div class="invalid-feedback">
+                {% for error in textform.search.errors %}
+                  <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+            {% else %}
+              {{ textform.search(class="form-control form-control-lg") }}
+
+             {% endif %}
+            </li>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="form-group">
+            {{ textform.submit_field(class="form-group btn btn-outline-info") }}
+          </div>
+        </fieldset>
+      </ul>
+    </form>
+  </div>
+</section>
+{% endblock content %}

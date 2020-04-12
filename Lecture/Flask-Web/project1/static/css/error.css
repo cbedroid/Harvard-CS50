@@ -1,0 +1,29 @@
+#sect-error h1, #sect-error h2, #sect-error h3, #sect-error .error-message {
+  text-align: center; }
+
+body {
+  background: #dbcfc1; }
+
+#sect-error {
+  font-size: 28px; }
+  #sect-error div {
+    margin: 20px 0; }
+  #sect-error h1, #sect-error h2, #sect-error h3 {
+    font-weight: bold;
+    margin: 10px; }
+  #sect-error h1 {
+    margin: 0;
+    padding: 10px;
+    color: white;
+    background: #7d7b78;
+    border-bottom: 2px solid black; }
+  #sect-error .error-message {
+    margin: 0 20px; }
+    #sect-error .error-message .error-links {
+      padding: 15px;
+      width: 80%; }
+      #sect-error .error-message .error-links button {
+        width: auto;
+        max-width: 40%; }
+
+/*# sourceMappingURL=error.css.map */
