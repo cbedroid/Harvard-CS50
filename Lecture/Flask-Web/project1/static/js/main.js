@@ -18,3 +18,14 @@ function changingText(secs){
   }
 
 ///changingText();
+$("#form-sorter").change(function(){
+  console.log('Script Running'); 
+  var sort = $("#sortby")[0];
+  var order = $("#orderby")[0];
+  var sortform = $("#form-sorter");
+  if (sort.value != 'none' && order.value != 'none'){
+    console.log('SORT:',sort.value,"\nORDER:",order.value)
+    $(sortform).submit()
+  return;
+  };
+ })

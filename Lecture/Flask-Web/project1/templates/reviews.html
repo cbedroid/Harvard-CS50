@@ -1,0 +1,71 @@
+{% extends "layout.html" %}
+
+{% block style %}
+  <link rel="stylesheet" type='text/css' href="{{ url_for('static', filename='css/reviews.css') }} "/>  
+{% endblock style %}
+
+{% block content %}
+<section class="content-container">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg">
+        <div class="info-section">
+          <div id="title">
+            <h3>{{ book.title }}</h3>
+          </div>
+          <div id='book-image'><img src="{{ book.cover_image }}" alt=""></div>
+          <ul>
+            <li><span>ISBN:</span>{{ book.isbn }}</li>
+            <li><span>Author:</span>{{ book.author.name }}</li>
+            <li class="rating"><span>Rating:</span> {{ rating.average_rating }}
+             (total rating: {{ rating.work_ratings_count }} )
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg">
+        <div class="reviews-section">
+          <h3>Reviews:</h3>
+          <form method="POST" action="" class="review-form">
+            <div class="form-group">
+                {{ form.ratefield.label(class="form-control-label") }}</br>
+              {% if form.ratefield.errors %}
+                {{ form.ratefield(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                  {% for error in form.ratefield.errors %}
+                    <span>{{ error }}</span>
+                  {% endfor %}
+                </div>
+              {% else %}
+                {% for subfield in form.ratefield %}
+                  <label class="radio" for="">
+                    {{ subfield }}
+                    {{ subfield.label }}
+                  </label>
+                 {% endfor %}
+              {% endif %}
+          </div>
+          <div class="form-group">
+                {{ form.textfield.label(class="form-control-label") }}</br>
+              {% if form.textfield.errors %}
+                {{ form.textfield(class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                  {% for error in form.textfield.errors %}
+                    <span>{{ error }}</span>
+                  {% endfor %}
+                </div>
+              {% else %}
+                {{ form.textfield(class="form-text") }}
+                {{ form.submit_form(class="btn btn-outline-info form-submit") }}
+              {% endif %}
+          </div>
+        </form>
+          <div id="user-review"></div>
+          <div class="view-window"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+{% endblock content %}

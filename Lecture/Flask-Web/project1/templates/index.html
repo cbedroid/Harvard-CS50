@@ -17,16 +17,30 @@
       </div>
 
       <div class="col-lg-4 welcome-view" id="sub-col-two">
-        <h3 class="pitch-title">Let's get started today</h3>
-        <p>Login to get access to all of your favorite books!
-        <ul>
-          <li>
-            <a href="{{ url_for('register') }}">Create Account</a>
-          </li>
-          <li>
-            <a href="{{ url_for('register') }}">Login</a>
-          </li>
-        </ul>
+        {% if not current_user.is_authenticated %}
+          <h3 class="pitch-title">Let's get started today</h3>
+          <p>Login to get access to all of your favorite books!
+          <ul>
+            <li>
+              <a href="{{ url_for('register') }}">Create Account</a>
+            </li>
+            <li>
+              <a href="{{ url_for('login') }}">Login</a>
+            </li>
+          </ul>
+        {% else %}
+        <h3 class="pitch-title">Welcome Back</h3>
+        <div id="welcome-back">
+          <span>{{ current_user.username }}</span>
+					<div id="wb-content">
+            <p>Lets get you caught up on our latest book reviews!
+              There are so many interesting new books available. Join
+              the fun and see what other users are saying about our awesome
+              reviews!</p>
+          </div>
+          <h4><a href="{{ url_for('search') }}">Join The Fun</a>
+        </div>
+       {% endif %}
       </div>
     </div>
   </section>
@@ -47,7 +61,7 @@
                   <img src="{{ book.image_url|safe }}" alt="">
                 </h3>
                 <div class="dc-rating">
-                  <h5>Rating</h5>
+                  <h5>Rated</h5>
                   {{ book.average_rating|safe }}
                   out of 5
                 </div>

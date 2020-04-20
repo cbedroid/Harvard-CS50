@@ -9,16 +9,16 @@
           <!-- Radio Buttons -->
           <div class="form-group">
             <li id='search-radio-btn'>
-              {{ radioform.radio.label(class="form-control-label") }}</br>
-            {% if radioform.radio.errors %}
-              {{ radioform.radio(class="form-control form-control-lg is-invalid") }}
+              {{ form.radio.label(class="form-control-label") }}</br>
+            {% if form.radio.errors %}
+              {{ form.radio(class="form-control form-control-lg is-invalid") }}
               <div class="invalid-feedback">
-                {% for error in radiofrom.radio.errors %}
+                {% for error in form.radio.errors %}
                   <span>{{ error }}</span>
                 {% endfor %}
               </div>
             {% else %}
-              {% for subfield in radioform.radio %}
+              {% for subfield in form.radio %}
                 <label class="radio" for="">
                   {{ subfield }}
                   {{ subfield.label }}
@@ -31,16 +31,16 @@
           <!-- Text Field -->
           <div class="form-group">
             <li id=search-bar>
-            {{ textform.search.label(class="form-control-label") }}
-            {% if textform.search.errors %}
-              {{ textform.search(class="form-control form-control-lg is-invalid") }}
+            {{ form.search.label(class="form-control-label") }}
+            {% if form.search.errors %}
+              {{ form.search(class="form-control form-control-lg is-invalid") }}
               <div class="invalid-feedback">
-                {% for error in textform.search.errors %}
+                {% for error in form.search.errors %}
                   <span>{{ error }}</span>
                 {% endfor %}
               </div>
             {% else %}
-              {{ textform.search(class="form-control form-control-lg") }}
+              {{ form.search(class="form-control form-control-lg") }}
 
              {% endif %}
             </li>
@@ -48,7 +48,7 @@
 
           <!-- Submit Button -->
           <div class="form-group">
-            {{ textform.submit_field(class="form-group btn btn-outline-info") }}
+            {{ form.submit_field(class="form-group btn btn-outline-info") }}
           </div>
         </fieldset>
       </ul>

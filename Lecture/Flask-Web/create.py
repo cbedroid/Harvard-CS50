@@ -1,7 +1,9 @@
 """ 
-    This file will establish connection to Heroku database
-    and the creation of the tables inside each of the  databases.
+    This file will establish connection to Heroku database.
+    Once Intialized,  all  table's name,rows and column will be popluated
+    inside each of the Herouke databases.
 """
+
 
 import os 
 from flask import Flask

@@ -37,7 +37,35 @@
             {{ form.email(class="form-control form-control-lg") }}
           {% endif %}
         </div>
-
+      
+        {% if not isLoginForm %}
+          <div class="form-group">
+            {{ form.firstname.label(class="form-control-label") }}
+            {% if form.firstname.errors %}
+              {{ form.firstname(class="form-control form-control-lg is-invalid") }}
+              <div class="invalid-feedback">
+                {% for error in form.firstname.errors %}
+                  <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+            {% else %}
+              {{ form.firstname(class="form-control form-control-lg") }}
+            {% endif %}
+          </div>
+          <div class="form-group">
+            {{ form.lastname.label(class="form-control-label") }}
+            {% if form.lastname.errors %}
+              {{ form.lastname(class="form-control form-control-lg is-invalid") }}
+              <div class="invalid-feedback">
+                {% for error in form.lastname.errors %}
+                  <span>{{ error }}</span>
+                {% endfor %}
+              </div>
+            {% else %}
+              {{ form.lastname(class="form-control form-control-lg") }}
+            {% endif %}
+          </div>
+        {% endif %}
         <div class="form-group">
           {{ form.password.label(class="form-control-label") }}
           {% if form.password.errors %}

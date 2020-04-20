@@ -1,7 +1,7 @@
-#sect-one, #ratings, .book-display, .book-display .dc-title {
+#sect-one, #ratings, .book-display, .book-display .dc-title, .info-section #title, .reviews-section #title, .info-section #book-image, .reviews-section #book-image {
   text-align: center; }
 
-.main-container, #sect-one, #sect-one .welcome-view, #sub-col-two p {
+.main-container, #sect-one, #sect-one .welcome-view, #sub-col-two p, .reviews-section .review-form .form-text, .reviews-section .review-form .form-submit {
   margin-left: auto;
   margin-right: auto; }
 
@@ -186,4 +186,77 @@ header {
     line-height: 1.2em;
     text-align: justify; }
 
-/*# sourceMappingURL=main.css.map */
+@media (min-width: 850px) {
+  .info-section, .reviews-section {
+    border-right: 2px solid black; }
+
+  .form-text {
+    width: 500px;
+    height: 125px; } }
+@media (max-width: 749px) {
+  .info-section, .reviews-section {
+    border-bottom: 2px solid black; }
+
+  .form-text {
+    width: 400px;
+    height: 120px; } }
+body {
+  background: #f0f0f0;
+  margin: 1%;
+  padding: 0;
+  font-size: 18px; }
+
+.col-lg {
+  margin: 0 1px;
+  padding: 0; }
+
+.content-container {
+  margin: 2%;
+  border: 2px solid black; }
+
+ul {
+  display: block;
+  list-style: none;
+  padding: 0; }
+
+.info-section, .reviews-section {
+  width: 100%;
+  height: 358px;
+  background: #c2c3c4; }
+  .info-section #title, .reviews-section #title {
+    width: 100%;
+    background: yellow; }
+    .info-section #title h3, .reviews-section #title h3 {
+      color: red; }
+  .info-section #book-image, .reviews-section #book-image {
+    margin: 10px 0; }
+    .info-section #book-image img, .reviews-section #book-image img {
+      width: 200px;
+      max-height: 200px;
+      border: 2px solid black; }
+  .info-section li span, .reviews-section li span {
+    display: inline-block;
+    background: red;
+    width: 65px;
+    margin: 2px 0; }
+
+.reviews-section {
+  border: 0;
+  width: 100%; }
+  .reviews-section .review-form {
+    position: relative;
+    margin-left: 10px; }
+    .reviews-section .review-form .form-label {
+      font-weight: 500; }
+    .reviews-section .review-form .form-text {
+      border: 1px solid black; }
+    .reviews-section .review-form .form-submit {
+      position: absolute;
+      margin-top: 5px;
+      right: 50%;
+      background: white; }
+
+.form-group li {
+  clear: initial; }
+
+/*# sourceMappingURL=reviews.css.map */

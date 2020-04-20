@@ -1,7 +1,11 @@
+requests
+xmltodict
 Flask
 Flask-Session
 psycopg2-binary
 SQLAlchemy
+flask_wtf
 flask_bcrypt
 flask_login==0.4.1
 flask_restful
+flask_sqlalchemy

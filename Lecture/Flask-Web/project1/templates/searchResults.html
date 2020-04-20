@@ -1,0 +1,91 @@
+{% extends "layout.html" %}
+
+{% macro PageNumber() -%}
+	<!-- paginated links --> 
+  {% set results  = data.results  %}
+	<div class="page-links-container">
+    <ul>
+      <li>
+        <button id="back-button" class="btn btn-outline-info mb-4">
+          <a href="{{ url_for('search') }}">Back</a>
+        </button>
+      </li>
+      <li id="page-number">
+       {% for pg in results.iter_pages(left_edge=1, right_edge=1, left_current=1,right_current=2) %}
+         {% if pg %}
+           {% if results.page == pg %}
+              <a class="btn btn-info mb-4 page-links" href="{{ url_for('searchResults', search=search,searchby=radio,page=pg) }}">{{ pg }}</a>
+           {% else %}
+              <a class="btn btn-outline-info mb-4 page-links" href="{{ url_for('searchResults', search=search,searchby=radio,page=pg) }}">{{ pg }}</a>
+           {% endif %}
+         {% endif  %}
+       {% endfor %}
+      </li>	
+      <li id="page-sorter">
+        <form action="{{ url_for('searchResults', search=search,searchby=radio,page=1) }}" id="form-sorter"method="post">
+          <select id="sortby" name="sortby">
+            <option value="none" selected disabled hidden>sort by</option>
+            <option value="title">title</option>
+            <option value="author">author</option>
+            <option value="year">year</option>
+          </select>	
+          <select id="orderby" name="orderby">
+            <option value="none" selected disabled hidden>order by</option>
+            <option value="asc">ascending</option>
+            <option value="des">descending</option>
+          </select>	
+        </form>
+      </li>
+    </ul>
+</div>
+{% endmacro %}
+
+
+{% block style %}
+    <link rel="stylesheet" type='text/css' href="{{ url_for('static', filename='css/results.css') }} "/>  
+{% endblock style %}
+
+{% block content %}
+<section class="results">
+  <div class="results-container">
+    <h3 id="results-count">Found: 
+      <span>{{ data.total }}</span>
+        {% if data.total>1 %} 
+          Books 
+        {% else %} 
+        Book 
+        {% endif %}
+    </h3>
+    {{  PageNumber() }}
+    <div class="items-container container">
+      <div class="row">
+        {% for result in data.results.items %}
+          <div class="col-sm-auto results-items">
+            <div class="inner-items">
+              <div class="book-cover">
+                <a href="#">
+                  <img src=" {{result.cover_image}}" alt="">
+                </a>
+							</div>
+              <div class="book-title">
+                <a href="{{ url_for('reviews', isbn=result.isbn) }} ">{{ result.title }}</a>
+              </div>
+							<div class="book-author">
+                <a href="#">{{ result.author.name }}</a>
+              </div>
+							<div class="book date">
+                {{ result.publish.year }}
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  {{  PageNumber() }}
+</section>
+
+<section id="related-books">
+</section>
+{% endblock content %}
+

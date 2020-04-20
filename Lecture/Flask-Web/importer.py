@@ -2,37 +2,19 @@
     In this file, I will collect all data from 'books.csv'
     and insert each row into the corresponding Heroku table.
 """
-import os
 import csv
-from . import app,db
-from .models import *
-
-
-class Setup():
-    @staticmethod
-    def getBooks():
-        # open book.csv
-        with  open('books.csv') as f:
-            return  list(csv.reader(f,delimiter=','))
-
-    @staticmethod
-    def filterAuthors(author):
-        """Remove duplicant rows from csv author list"""
-        return set(author)
-
-    @staticmethod
-    def filterYears(years):
-        """Remove duplicant rows from csv years list"""
-        return set(author)
-
+from project1 import app,db
+from project1.models import *
+from booksetup import GoodRead 
 
 class Book(Books):
     all_authors  = {}
     all_years = {}
 
-    def __init__(self,isbn,title):
+    def __init__(self,isbn,title,cover_image):
         self.isbn = isbn
         self.title = title 
+        self.cover_image = cover_image
         
     def add_author(self,creator):
         author = creator.name
@@ -51,7 +33,7 @@ class Book(Books):
             db.session.add(publish)
         else:
             self.publish_id = self.all_years[year]
-
+    
 
 class Creator(Authors):
     index = 1
@@ -70,17 +52,26 @@ class PublishDate(Publish):
 
         
 
-def main():
+def writeDatabase():
     # Here we will create each book's column.
     all_authors = []
     all_years = []
     
-    for isbn,title,author,year in Setup.getBooks():
-        book = Book(isbn,title)
+    GR = GoodRead()
+    books = GR.readCsv()
+    isbns = [x[0] for x in books]
+    GR.run()
+    images = GR.images # books cover images
+
+    if not images:
+        raise TypeError('NO IMAGES')
+    count = 0
+    for isbn,title,author,year in books:
+        book = Book(isbn,title,cover_image=images[count])
         book.add_author(Creator(author))
         book.add_publish(PublishDate(year))
         db.session.add(book)
-        #print(f'Added {author} Book {title}')
+        count+=1
     db.session.commit()
     print('Books added: successfully')
 

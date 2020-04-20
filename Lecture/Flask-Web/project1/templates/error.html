@@ -15,9 +15,9 @@
 </head>
 <body>
   <section id="sect-error">
-    <h1 class='title'>Access Denied</h1>
     {%if error %}
      {% if error==1 %}
+        <h1 class='title'>Access Denied</h1>
         <h2>We're Sorry :-(</h2>
         <div class="error-message">
           <p>Please log in or create an account to view this Page.</p>
@@ -28,12 +28,33 @@
           </div>
         </div>
      {% elif error==2 %}
-      <h2>Internal Error</h2>
-      <h3>Something went wrong </h3>
+      <h1 class='title'>No Results Found</h1>
+      {% if error_msg %}
+        <h3>Sorry,There is no books with {{ error_msg.category }}: {{ error_msg.reason }}</h3>
+      {% endif %}
       <div class="error-message">
         <a href="{{ url_for('home') }}">Home</a>
+        <a href="{{ url_for('search') }}">Search</a>
       </div>
+     {% elif error==3 %}
+       <h1 class='title'>invalid url request</h1>
+       <h3>opps, the url path you requested is invalid...</h3>
+       <div class="error-message">
+         <a href="{{ url_for('home') }}">home</a>
+         <a href="{{ url_for('search') }}">search</a>
+       </div>
+     {% elif error==4 %}
+       <h1 class='title'>invalid url request</h1>
+       <h3>Server Error...</h3>
+       <div class="error-message">
+         <a href="{{ url_for('home') }}">home</a>
+         <a href="{{ url_for('search') }}">search</a>
+       </div>
+
+
+
      {% endif %}
+
     {% endif %}
   </section>
 </body>

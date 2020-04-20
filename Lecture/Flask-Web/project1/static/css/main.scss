@@ -210,6 +210,7 @@ header {
   @extend %centered;
   
   .dc-title{
+    @extend %centered;
     font-size:18px;
     font-weight: bold;
    }
@@ -243,4 +244,25 @@ header {
 .container-section {
   margin:0 25px;
 }
+
+#welcome-back{
+  font-size:18px;
+  span {
+    color:blue;
+    font-size:22px;
+  }
+  #wb-content {
+    margin-bottom: 5px;
+    text-align:left;
+    padding:0;
+  }
+  p{
+    margin:0;
+    display: inline-block;
+    word-wrap: break-word;
+    line-height: 1.2em;
+    text-align:justify;		
+  }
+}
+
 

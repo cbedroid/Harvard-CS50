@@ -1,0 +1,117 @@
+@import 'main';
+@media (min-width: 850px) {
+  .info-section{
+    border-right:2px solid black;     
+  }
+  
+  .form-text{
+    width:500px;
+    height:125px;
+  }
+
+}
+
+@media (max-width: 749px) {
+  .info-section{
+    border-bottom:2px solid black;     
+  }
+  .form-text{
+    width:400px;
+    height:120px;
+  }
+
+
+
+ }
+ 
+
+body {
+  background:$white;
+  margin:1%;
+  padding:0;
+  font-size:18px;
+}
+
+.col-lg {
+  margin:0 1px;
+  padding:0;
+}
+
+.content-container{
+  margin:2%;
+  border: 2px solid black;
+}
+
+ul{
+  display:block;
+  list-style:none;
+  padding:0;
+}
+
+.info-section{
+  width:100%;
+  ///width:300px;
+  height:358px;
+  background:$grey;
+
+  #title {
+    width:100%;
+    @extend %centered;
+    background:yellow;
+    h3{
+      color:red;
+    }
+  }
+
+  #book-image{
+    @extend %centered;
+    margin:10px 0;
+     img{
+       width:200px;
+       max-height:200px;
+       border: 2px solid black;
+    }
+  }
+  li{
+    span {
+      display:inline-block;
+      background:red;
+      width:65px;
+      margin:2px 0;
+    }
+  }
+}
+
+
+.reviews-section{
+  @extend .info-section;
+  border:0;
+  width:100%;
+
+  .review-form{
+    position:relative;
+    margin-left:10px;
+
+    .form-label{
+      font-weight:500;
+    }
+    .form-text{
+      @extend %centerPg;
+      border:1px solid black;
+    }
+    .form-submit{
+
+      position:absolute;
+      margin-top:5px;
+      right:50%;
+      @extend %centerPg;
+      background:white;
+    }
+  }
+}
+
+.form-group{
+li{
+  clear:initial;
+}
+}
