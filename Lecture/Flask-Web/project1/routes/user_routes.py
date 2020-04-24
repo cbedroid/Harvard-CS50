@@ -14,17 +14,23 @@ def login():
 
         # Get the first account with the matching email address
         email_address = login.email.data
-        user = Users.query.filter_by(email=email_address).first()
+        try: # rollback the session and reload user 
+            user = Users.query.filter_by(email=email_address).first()
+        except:
+            db.session.rollback()
+            user = Users.query.filter_by(email=email_address).first()
+
         rememberme = login.remember.data
 
         # Check for password
         # because the password has sensitive information, we should
-        # let a function handle the conversion ,instead of capturing it into a variable
+        # let a function handle the conversion ,instead of capturing 
+        # it into a variable
         if user and login.password_is_validate(user.password):
             # Begin the user session
             login_user(user)
             if previous_page:
-                return redirect(previous_page)
+                return redirect(url_for(previous_page))
             else:
                 return redirect(url_for('home'))
         else:
@@ -47,8 +53,8 @@ def register():
     if registration.validate_on_submit():
         username = registration.username.data
         email = registration.email.data
-        firstname = registration.firstname.data
-        lastname = registration.lastname.data
+        firstname = registration.firstname.data.strip().title()
+        lastname = registration.lastname.data.strip().title()
         password = registration.hashed_password #encrypting password
 
         #Creating user 

@@ -119,7 +119,6 @@ class GoodReads():
             isbn = [",".join(isbn)]
         else:
             isbn = [str(isbn)]
-        #print('IMAGE START LEN:',len(isbn))
         data  = self.multipleRatings(isbns=isbn)
         if data:
             data = self._isbnToIds(data)

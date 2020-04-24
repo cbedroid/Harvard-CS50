@@ -1,71 +1,108 @@
 {% extends "layout.html" %}
 
+
 {% block style %}
   <link rel="stylesheet" type='text/css' href="{{ url_for('static', filename='css/reviews.css') }} "/>  
 {% endblock style %}
 
 {% block content %}
+{% set book = data.book  -%}
+{% set rating = data.rating  -%}
+{% set reviews = data.reviews  -%}
+{% set form = data.form  -%}
 <section class="content-container">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg">
-        <div class="info-section">
-          <div id="title">
-            <h3>{{ book.title }}</h3>
-          </div>
-          <div id='book-image'><img src="{{ book.cover_image }}" alt=""></div>
-          <ul>
-            <li><span>ISBN:</span>{{ book.isbn }}</li>
-            <li><span>Author:</span>{{ book.author.name }}</li>
-            <li class="rating"><span>Rating:</span> {{ rating.average_rating }}
-             (total rating: {{ rating.work_ratings_count }} )
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="col-lg">
-        <div class="reviews-section">
-          <h3>Reviews:</h3>
-          <form method="POST" action="" class="review-form">
-            <div class="form-group">
-                {{ form.ratefield.label(class="form-control-label") }}</br>
-              {% if form.ratefield.errors %}
-                {{ form.ratefield(class="form-control form-control-lg is-invalid") }}
-                <div class="invalid-feedback">
-                  {% for error in form.ratefield.errors %}
-                    <span>{{ error }}</span>
-                  {% endfor %}
-                </div>
-              {% else %}
-                {% for subfield in form.ratefield %}
-                  <label class="radio" for="">
-                    {{ subfield }}
-                    {{ subfield.label }}
-                  </label>
-                 {% endfor %}
-              {% endif %}
-          </div>
-          <div class="form-group">
-                {{ form.textfield.label(class="form-control-label") }}</br>
-              {% if form.textfield.errors %}
-                {{ form.textfield(class="form-control form-control-lg is-invalid") }}
-                <div class="invalid-feedback">
-                  {% for error in form.textfield.errors %}
-                    <span>{{ error }}</span>
-                  {% endfor %}
-                </div>
-              {% else %}
-                {{ form.textfield(class="form-text") }}
-                {{ form.submit_form(class="btn btn-outline-info form-submit") }}
-              {% endif %}
-          </div>
-        </form>
-          <div id="user-review"></div>
-          <div class="view-window"></div>
-        </div>
-      </div>
+  {% set back_link = request.referrer   -%}
+  <div id="url-button">
+    {{ url_button(link=back_link|unquote,class="nav-button") }}
+    {{ url_button("home",text="Home",class="nav-button") }}
+    {{ url_button("search",text="Search",class="nav-button") }}
+  </div>
+  <div class="info-section">
+    <div id="title" class="centered">
+      <h4>{{ book.title }}</h4>
+    </div>
+    <div id='book-image' class="centered"><img src="{{ book.cover_image }}" alt=""></div>
+    <div class="book-details">
+      <ul>
+        <li><span>ISBN:</span>{{ book.isbn }}</li>
+        <li><span>Author:</span>{{ book.author.name }}</li>
+        <li class="rating"><span>Rating:</span> {{ rating.average_rating }}
+         (total rating: {{ rating.work_ratings_count }} )
+        </li>
+    </ul>
     </div>
   </div>
-
+  <div class="reviews-container">
+    <h2 class="centered">REVIEWS</h2>
+    <div class="review-section">
+      {% if reviews %}
+        {% for review in reviews %}
+          <div class="reviews">
+            {% if review.user.firstname and  review.user.lastname %}
+              <h4>{{ review.user.firstname }} {{ review.user.lastname }}</h4>
+            {% else %}
+              <h4>{{ review.user.username }}</h4>
+            {% endif %}
+            <div class="details">
+              <span>Rated {{ "&#11088;"|safe * review.rate}} </span>
+							<input type="checkbox" id="expanded">
+							<p>{{ review.review }}</p>
+							<label for="expanded" role="button">read more</label>
+								<!--h5>...see more</h5-->
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        <h3 id="no-reviews" class='centered'>No Reviews Available</h3>  
+      {% endif %}
+  </div>
+  </div>
+  <div id="user-form">
+    <h3>Reviews:</h3>
+    <form method="POST" action="" class="post-form">
+      {{ form.csrf_token }}
+      <div class="form-check form-check-inline">
+        {{ form.ratefield.label(class="form-check-label") }}</br></br>
+          {% for subfield in form.ratefield %}
+            <label for="">
+              <ul>
+                <li>
+                  {{ subfield }}
+                  {{ subfield.label(class="form-check-input") }}
+                </li>
+              </ul>
+            </label>
+          {% endfor %}
+        {% if form.ratefield.errors %}
+          </br>
+          <div class="alert alert-danger">
+            {% for error in form.ratefield.errors %}
+              {{ error }}
+            {% endfor %}
+          </div>
+       {% endif %}
+    </div>
+    <div class="form-group">
+        {{ form.textfield.label(class="form-control-label") }}</br>
+        {% if form.textfield.errors %}
+          {{ form.textfield(class="form-control form-control-lg is-invalid") }}
+          <div class="invalid-feedback">
+            {% for error in form.textfield.errors %}
+              <span>{{ error }}</span>
+            {% endfor %}
+          </div>
+        {% else %}
+          {{ form.textfield(class="form-text") }}
+        {% endif %}
+        <div id="submit-container">
+          {{ form.submit_form(class="btn btn-outline-info form-submit") }}
+        </div>
+    </div>
+  </form>
+ </div>
+ 
 </section>
 {% endblock content %}
+{% block bottomjs %}
+  <script src="{{ url_for('static',filename='../js/review.js') }}"></script>
+{% endblock bottomjs%}

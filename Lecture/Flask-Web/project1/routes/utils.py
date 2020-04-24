@@ -29,6 +29,11 @@ def BaseRedirect(user=None):
         return inner
     return outer
 
-redirectUnauthorizedUser = BaseRedirect
-redirectNoneResults = BaseRedirect
+
+# login required function, yes I know I could have used it instead
+redirectUnauthorizedUser = BaseRedirect 
+
+# redirect any pages the does not render or redirect to a template
+# also catch error in routes 
+redirectOnNone = BaseRedirect
 

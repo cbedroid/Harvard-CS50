@@ -3,26 +3,28 @@
   .info-section{
     border-right:2px solid black;     
   }
+
   
   .form-text{
-    width:500px;
-    height:125px;
+    width:700px;
+    height:150px;
   }
 
 }
 
-@media (max-width: 749px) {
+@media (max-width: 849px) {
   .info-section{
     border-bottom:2px solid black;     
+  #book-image{
+    margin:10px 0;
   }
+  }
+
   .form-text{
-    width:400px;
-    height:120px;
+    width:300px;
+    height:150px;
   }
-
-
-
- }
+}
  
 
 body {
@@ -32,15 +34,27 @@ body {
   font-size:18px;
 }
 
-.col-lg {
-  margin:0 1px;
-  padding:0;
-}
+#url-button{
+    @extend %centered;
+  .nav-button{
+    font-size:18px;
+    font-weight:bold;
+    margin:1px;
+    padding:5px;
+    width:150px;
+    background:black;
+    a {
+      text-decoration:none;
+    }
+  }
+  .nav-button:hover{
+    color:white;
+    background:$grey;
+    border:1.5px solid blue;
 
-.content-container{
-  margin:2%;
-  border: 2px solid black;
-}
+  }
+ }
+
 
 ul{
   display:block;
@@ -48,50 +62,141 @@ ul{
   padding:0;
 }
 
+.content-container{
+  display:block;
+  margin:2%;
+  border: 2px solid black;
+}
+
 .info-section{
-  width:100%;
-  ///width:300px;
+  float:left;
+  width:50%;
   height:358px;
   background:$grey;
+  border:1px solid black;
+  border-collapse:collapse;
 
   #title {
+    padding:0;
     width:100%;
     @extend %centered;
     background:yellow;
-    h3{
+    h4{
       color:red;
     }
   }
 
   #book-image{
     @extend %centered;
-    margin:10px 0;
      img{
        width:200px;
-       max-height:200px;
+       max-height:175px;
        border: 2px solid black;
     }
   }
+  ul{
+    margin:1%;
+  }
   li{
+    padding:2px;
+    border:1px solid black;
+    background:white;
     span {
+      padding:5.5px;
       display:inline-block;
       background:red;
+      padding-left:2px;
       width:65px;
-      margin:2px 0;
+      border-left:2px solid black;
+      border-right:2px solid black;
     }
   }
 }
 
 
-.reviews-section{
+.centered{
+  @extend %centered;
+}
+
+.reviews-container{
   @extend .info-section;
+  background: #e3e3e3;
+  
+  .review-section  {
+    max-height:300px;
+    overflow:auto;
+  }
+
+.reviews{
+	display:block;
+	margin:5px;
+	padding:5px;
+	border:4px solid black;
+	background: white;
+	h4  {
+		background:$grey;
+	}
+
+  .details{
+    span{
+      font-size:16px;
+      font-weight:600;
+      }
+
+		input {
+			opacity: 0;
+			position: absolute;
+			pointer-events: none;
+			}
+
+			p{
+				display: -webkit-box;
+				-webkit-line-clamp: 3;
+				-webkit-box-orient: vertical;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+
+			input:focus ~ label {
+    		outline: -webkit-focus-ring-color auto 5px;
+  		}
+
+ 	 		input:checked + p {
+    		-webkit-line-clamp: unset;
+  		}
+  
+  		input:checked ~ label,
+  		p:not(.truncated) ~ label{
+    		display: none;
+ 			 }
+
+			label {
+				border-radius: 4px;
+				padding: 0.2em 0.6em;
+				border: 1px solid #009ce2;
+				background-color: #00acff;
+				color: #fff;
+				font-size: 0.8em;
+				}	
+  		}//details
+     }//reviews
+	}
+
+
+#user-form{
+  background:$grey;
   border:0;
   width:100%;
 
-  .review-form{
+  .post-form{
     position:relative;
     margin-left:10px;
 
+    .alert{
+      padding:5px;
+      max-height: 30px;
+      font-size:15px
+    }
     .form-label{
       font-weight:500;
     }
@@ -99,13 +204,14 @@ ul{
       @extend %centerPg;
       border:1px solid black;
     }
-    .form-submit{
-
-      position:absolute;
+    #submit-container{
+      @extend %centered;
       margin-top:5px;
-      right:50%;
-      @extend %centerPg;
-      background:white;
+    .form-submit{
+      font-size: 20px;
+      font-weight:bold;
+      background:orange;
+      }
     }
   }
 }
@@ -115,3 +221,4 @@ li{
   clear:initial;
 }
 }
+

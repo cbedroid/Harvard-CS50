@@ -1,7 +1,7 @@
-#sect-one, #ratings, .book-display, .book-display .dc-title, .info-section #title, .reviews-section #title, .info-section #book-image, .reviews-section #book-image {
+#sect-one, #ratings, .book-display, .book-display .dc-title, #url-button, .info-section #title, .reviews-container #title, .info-section #book-image, .reviews-container #book-image, .centered, #user-form .post-form #submit-container {
   text-align: center; }
 
-.main-container, #sect-one, #sect-one .welcome-view, #sub-col-two p, .reviews-section .review-form .form-text, .reviews-section .review-form .form-submit {
+.main-container, #sect-one, #sect-one .welcome-view, #sub-col-two p, #user-form .post-form .form-text {
   margin-left: auto;
   margin-right: auto; }
 
@@ -186,75 +186,150 @@ header {
     line-height: 1.2em;
     text-align: justify; }
 
+#back-button {
+  margin: 0;
+  background: #c2c3c4; }
+
 @media (min-width: 850px) {
-  .info-section, .reviews-section {
+  .info-section, .reviews-container {
     border-right: 2px solid black; }
 
   .form-text {
-    width: 500px;
-    height: 125px; } }
-@media (max-width: 749px) {
-  .info-section, .reviews-section {
+    width: 700px;
+    height: 150px; } }
+@media (max-width: 849px) {
+  .info-section, .reviews-container {
     border-bottom: 2px solid black; }
+    .info-section #book-image, .reviews-container #book-image {
+      margin: 10px 0; }
 
   .form-text {
-    width: 400px;
-    height: 120px; } }
+    width: 300px;
+    height: 150px; } }
 body {
   background: #f0f0f0;
   margin: 1%;
   padding: 0;
   font-size: 18px; }
 
-.col-lg {
-  margin: 0 1px;
-  padding: 0; }
-
-.content-container {
-  margin: 2%;
-  border: 2px solid black; }
+#url-button .nav-button {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 1px;
+  padding: 5px;
+  width: 150px;
+  background: black; }
+  #url-button .nav-button a {
+    text-decoration: none; }
+#url-button .nav-button:hover {
+  color: white;
+  background: #c2c3c4;
+  border: 1.5px solid blue; }
 
 ul {
   display: block;
   list-style: none;
   padding: 0; }
 
-.info-section, .reviews-section {
-  width: 100%;
+.content-container {
+  display: block;
+  margin: 2%;
+  border: 2px solid black; }
+
+.info-section, .reviews-container {
+  float: left;
+  width: 50%;
   height: 358px;
-  background: #c2c3c4; }
-  .info-section #title, .reviews-section #title {
+  background: #c2c3c4;
+  border: 1px solid black;
+  border-collapse: collapse; }
+  .info-section #title, .reviews-container #title {
+    padding: 0;
     width: 100%;
     background: yellow; }
-    .info-section #title h3, .reviews-section #title h3 {
+    .info-section #title h4, .reviews-container #title h4 {
       color: red; }
-  .info-section #book-image, .reviews-section #book-image {
-    margin: 10px 0; }
-    .info-section #book-image img, .reviews-section #book-image img {
-      width: 200px;
-      max-height: 200px;
-      border: 2px solid black; }
-  .info-section li span, .reviews-section li span {
-    display: inline-block;
-    background: red;
-    width: 65px;
-    margin: 2px 0; }
+  .info-section #book-image img, .reviews-container #book-image img {
+    width: 200px;
+    max-height: 175px;
+    border: 2px solid black; }
+  .info-section ul, .reviews-container ul {
+    margin: 1%; }
+  .info-section li, .reviews-container li {
+    padding: 2px;
+    border: 1px solid black;
+    background: white; }
+    .info-section li span, .reviews-container li span {
+      padding: 5.5px;
+      display: inline-block;
+      background: red;
+      padding-left: 2px;
+      width: 65px;
+      border-left: 2px solid black;
+      border-right: 2px solid black; }
 
-.reviews-section {
+.reviews-container {
+  background: #e3e3e3; }
+  .reviews-container .review-section {
+    max-height: 300px;
+    overflow: auto; }
+  .reviews-container .reviews {
+    display: block;
+    margin: 5px;
+    padding: 5px;
+    border: 4px solid black;
+    background: white; }
+    .reviews-container .reviews h4 {
+      background: #c2c3c4; }
+    .reviews-container .reviews .details span {
+      font-size: 16px;
+      font-weight: 600; }
+    .reviews-container .reviews .details input {
+      opacity: 0;
+      position: absolute;
+      pointer-events: none; }
+    .reviews-container .reviews .details p {
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis; }
+    .reviews-container .reviews .details input:focus ~ label {
+      outline: -webkit-focus-ring-color auto 5px; }
+    .reviews-container .reviews .details input:checked + p {
+      -webkit-line-clamp: unset; }
+    .reviews-container .reviews .details input:checked ~ label,
+    .reviews-container .reviews .details p:not(.truncated) ~ label {
+      display: none; }
+    .reviews-container .reviews .details label {
+      border-radius: 4px;
+      padding: 0.2em 0.6em;
+      border: 1px solid #009ce2;
+      background-color: #00acff;
+      color: #fff;
+      font-size: 0.8em; }
+
+#user-form {
+  background: #c2c3c4;
   border: 0;
   width: 100%; }
-  .reviews-section .review-form {
+  #user-form .post-form {
     position: relative;
     margin-left: 10px; }
-    .reviews-section .review-form .form-label {
+    #user-form .post-form .alert {
+      padding: 5px;
+      max-height: 30px;
+      font-size: 15px; }
+    #user-form .post-form .form-label {
       font-weight: 500; }
-    .reviews-section .review-form .form-text {
+    #user-form .post-form .form-text {
       border: 1px solid black; }
-    .reviews-section .review-form .form-submit {
-      position: absolute;
-      margin-top: 5px;
-      right: 50%;
-      background: white; }
+    #user-form .post-form #submit-container {
+      margin-top: 5px; }
+      #user-form .post-form #submit-container .form-submit {
+        font-size: 20px;
+        font-weight: bold;
+        background: orange; }
 
 .form-group li {
   clear: initial; }

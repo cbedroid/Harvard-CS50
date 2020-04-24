@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <link rel="icon" sizes="32x32" href="{{ url_for('static', filename='images/favicons/favicon.ico') }}"/>
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
@@ -21,6 +22,20 @@
   </title>
 </head>
 
+{% macro url_button(url="",text='Back',class='',link="" ) -%}
+    {% if link %}
+    <a href="{{ link }}">
+    {% else %}
+      <a href="{{ url_for( url ) }}">
+    {% endif %}
+      <button id="back-button" class="btn btn-outline-info {{ class }}">
+        {{ text }}
+      </button>
+    </a>
+{%- endmacro %}
+
+{% block topjs %}
+  {% endblock topjs %}
 <body id="bootstrap-overrides">
   <header class="site-header">
 		<nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
@@ -75,4 +90,6 @@
   </div>
 </body>
   <script src="{{ url_for('static',filename='../js/main.js') }}"></script>
+  {% block bottomjs %}
+  {% endblock bottomjs %}
 </html>

@@ -2,11 +2,10 @@ from . import bcrypt
 from .models import Users
 from flask_wtf import FlaskForm
 from flask_login import current_user
-from flask_wtf.file import FileField, FileAllowed
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, \
                     TextAreaField, RadioField
-from wtforms.validators import DataRequired, Length, Email,\
-                    EqualTo, ValidationError,Optional
+from wtforms.validators import DataRequired,Length, Email,\
+                    EqualTo, ValidationError
 
 
 class RegistrationForm(FlaskForm):
@@ -54,7 +53,6 @@ class LoginForm(FlaskForm):
             return True
 
 
-
 class SearchForm(FlaskForm):
     radio = RadioField('Select',
                         default="title",
@@ -68,26 +66,32 @@ class SearchForm(FlaskForm):
 
 class ReviewForm(FlaskForm):
     textfield = TextAreaField('Write a review', 
-            #render_kw=dict(rows=8,cols=45),
-            validators=[DataRequired('Review can not be empty'),
+            validators=[DataRequired('Review field can not be empty'),
                         Length(max=500)])
 
-    ratefield = RadioField('Rate',
-                    #default="5 stars",
-                    choices=[('one','1 &#11088; '),('two','2 &#11088; '),
-                        ('three',' 3 &#11088; '),('four','4 &#11088; '),('five','5 &#11088;') ],
-                    validators=[DataRequired()]
+    ratefield = RadioField('Rate &#11088;',
+                    choices=[('1','1'),('2','2'),
+                        ('3','3'),('4','4'),('5','5') ],
+                    validators=[DataRequired('Please Select a rate.')]
                     )
-
     submit_form = SubmitField('Submit Form')
 
-    def validate_textfield(self, text):
-        print('\n\nVAL_TEXT:',text)
-        if not text:
+    def validate_textfield(self, textfield):
+        if textfield.data is  None:
             raise ValidationError( '''No character enter !!''')
 
-    def validate_ratefield(self, text):
-        if not text:
+    def validate_ratefield(self, ratefield):
+        if ratefield.data is None:
             raise ValidationError( '''please select a rate !!''')
 
+
+    def getFields(self):
+        """Returns both the textfield and ratefield data"""
+        return self.textfield.data, self.ratefield.data
+
+    @classmethod
+    def clearForms(cls):
+        cls.textfield.data = ""
+        cls.ratefield.data = ""
+            
 

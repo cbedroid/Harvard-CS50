@@ -1,20 +1,22 @@
 from . import *
 from ..api import GoodReads
 from ..forms import SearchForm,ReviewForm
-from .utils import redirectUnauthorizedUser,redirectNoneResults
+from .utils import redirectUnauthorizedUser,redirectOnNone
 
 GR = GoodReads()
+
+cache = {}
+uri_reviews_cache = {}
+
 @app.route("/",methods=['GET'])
 @app.route("/home",methods=['GET'])
 def home():
-    
     data = GR.readBookXml()
     return render_template('index.html',title="JustBookItUp",
             books=data)
 
 
-
-@app.route("/search",methods=['GET','POST'])
+@app.route("/books/search",methods=['GET','POST'])
 @redirectUnauthorizedUser(current_user)
 @login_required
 def search():
@@ -25,7 +27,7 @@ def search():
     search = str(form.search.data).strip()
 
     if request.method.lower() == 'post':
-        # check whether user fill out both froms: radio and search fields
+        # check whether user fill out both forms: radio and search fields
         # radio form default value ='title' 
         # so we will just check the value of `search`
         if search:
@@ -39,12 +41,10 @@ def search():
     return render_template('search.html',form=form)
 
     
-cache = {}
-@app.route('/api/books/results',methods=['GET','POST'])
-@redirectNoneResults(current_user)
+@app.route('/books/results',methods=['GET','POST'])
+@redirectOnNone(current_user)
 def searchResults(**kwargs):
     global cache
-   
     page = request.args.get('page',1,type=int)
     search = request.args.get('search','')
     radio = request.args.get('searchby','title',type=str)
@@ -56,22 +56,18 @@ def searchResults(**kwargs):
     if radio:
         if radio == "title":
             results = Books.getByTitle(search)
-
         elif radio == "author":
             results = Books.getByAuthor(search)
-
         elif radio == "isbn":
             results = Books.getByIsbn(search)
-
         elif radio == "year":
             results = Books.getByYear(search)
         else:
             return render_template('error.html',error=3)
-
-            
-        if results.all():
+                
+        if results:
             if page == 1:
-                cache = dict(radio=radio,search=search)
+                cache.update(dict(radio=radio,search=search))
             else:
                 # throw error if user manually insert 
                 # different endpoint in url 
@@ -89,8 +85,7 @@ def searchResults(**kwargs):
             #update the data
             data.update(
                         cache=cache, isbn=isbns,
-                        results=results.paginate(per_page=25,page=page)
-                    )
+                        results=results.paginate(per_page=24,page=page))
         else:
             return
 
@@ -99,27 +94,59 @@ def searchResults(**kwargs):
                         data=data)
     
 
-@app.route('/api/books/reviews/',methods=['GET','POST'])
-@redirectNoneResults(current_user)
+@app.route('/books/reviews/',methods=['GET','POST'])
+@redirectOnNone(current_user)
 def reviews():
-    # Get all of the books reviews
+    global reviews_cache
 
     isbn = request.args.get('isbn',None)
-    textform = ReviewForm()
+    # Get  books reviews
+    user = current_user
+    reviewform = ReviewForm()
 
-    if request.method.lower() ==  'post':
-        if textform.validate_on_submit():
-           user_review = textform.textfield.data
-           print('\n\nVALIDATING:')
-           flash('Your review was commit successfully','success')
-           return redirect(url_for('reviews',isbn=isbn))
-            
+    #Get current user review from database
+    BR = BookReviews()
+    this_book = Books.getByIsbn(isbn).first_or_404()
+    user_review =  BR.get_user_review(user,this_book)
+
+    # check form for user_input
+    if reviewform.validate_on_submit():
+        textfield,ratefield = reviewform.getFields()
+        data = uri_reviews_cache
+
+        #Check if current user already submitted a review
+        if  user_review:
+            flash('Sorry,you already submitted a review for this book','warning')
+            uri_reviews_cache['form'] = ReviewForm()
+        else: 
+            #Add the user review
+            BR.addReview(user,this_book,reviewform)
+            flash('Your review was commit successfully','success')
+        ReviewForm.clearForms()
+        return redirect(url_for('reviews',isbn=isbn))
+             
     elif not isbn:
         return render_template('error.html',error=3)
 
-    book = Books.getByIsbn(isbn).first_or_404()
-    rating = GR.getRatings(isbns = [isbn])['books'][0]
-    reviews = GR.bookReview(isbn=book.isbn)
-    
-    return render_template('reviews.html',rating=rating,book=book,form=textform)
+    all_reviews = BR.allReviews(this_book)
+    good_read_rating = GR.getRatings(isbns=[isbn])['books'][0]
+
+    #FOR ERRORS: storing data in memorization for faster rendering 
+    # since we will reload the page again on error
+    uri_reviews_cache.update(
+                            dict(book=this_book, rating=good_read_rating,
+                                reviews=all_reviews, form=reviewform)
+                            )
+    return render_template('reviews.html',data=uri_reviews_cache)
    
+
+
+@app.route("/api/",methods=['GET','POST'])
+def json_isbn():
+    isbn = request.args.get('isbn')
+    if isbn:
+        data = BookReviews.jsonify(isbn)
+        return jsonify(data)
+    return jsonify({})
+    
+

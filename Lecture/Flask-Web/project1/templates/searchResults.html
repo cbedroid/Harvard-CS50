@@ -6,9 +6,7 @@
 	<div class="page-links-container">
     <ul>
       <li>
-        <button id="back-button" class="btn btn-outline-info mb-4">
-          <a href="{{ url_for('search') }}">Back</a>
-        </button>
+        {{ url_button("search",text="Back",class="back_button") }}
       </li>
       <li id="page-number">
        {% for pg in results.iter_pages(left_edge=1, right_edge=1, left_current=1,right_current=2) %}
@@ -63,7 +61,7 @@
           <div class="col-sm-auto results-items">
             <div class="inner-items">
               <div class="book-cover">
-                <a href="#">
+                <a href="{{ url_for('reviews', isbn=result.isbn) }} ">
                   <img src=" {{result.cover_image}}" alt="">
                 </a>
 							</div>

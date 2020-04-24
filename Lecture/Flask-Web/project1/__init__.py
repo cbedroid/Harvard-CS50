@@ -5,6 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 from flask_restful import Resource, Api, reqparse
+from urllib.parse import unquote
 from datetime import timedelta
 
 # import database uri  credential from file 
@@ -26,9 +27,15 @@ app.config["SQLALCHEMY_DATABASE_URI"] =  database
 #secrets.token_hex(32) 32 bytes: increase bytes value for better encryption
 app.config['SECRET_KEY'] = '9744fea133cd127d1d0b67f3d7e54be7dfe039e7d9f42935832e17be46102d00c0c9c30260a0745d09b360b32c1b43006d64f408a66e3c6c57631110576be7e3'
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+app.config["TEMPLATES_AUTO_RELOAD"] = True
+app.config['JSON_SORT_KEYS'] = False
 env = jinja2.Environment()
+
 env.globals.update(zip=zip)
 app.jinja_env.globals.update(zip=zip)
+
+env.filters['unquote'] = lambda url: unquote(url)
+app.jinja_env.filters['unquote'] = lambda url: unquote(url)
 
 
 

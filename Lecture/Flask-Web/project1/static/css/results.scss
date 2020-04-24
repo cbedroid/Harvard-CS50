@@ -1,11 +1,11 @@
 
 @import 'main';
 
-@media (min-width: 650px) {
+@media (min-width: 850px) {
 .page-links-container {
   ul{
     position:relative;
-  }
+      }
     #page-sorter{
       position:absolute;
       top:5;
@@ -14,7 +14,7 @@
   }
 }
 
-@media (max-width: 649px) {
+@media (max-width: 849px) {
   .page-links-container {
     ul{
       position:relative;
@@ -179,6 +179,7 @@ body {
 .page-links-container {
   ul{
     display:block;
+    margin-left:50px;
   }
   li {
       display:inline-block;
@@ -191,11 +192,13 @@ body {
     background:$grey;
     padding:5px;
     height:35px;
+   }
+}
+.back_button  {
+  position:absolute;
+  top:2%;
+  left:-3%;
   }
-}
 
-#back-button {
-  margin:0;
-  background:$grey;
-  margin-left:50px;
-}
+
+
